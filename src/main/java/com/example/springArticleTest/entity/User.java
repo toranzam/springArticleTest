@@ -5,9 +5,9 @@ public class User {
     private Integer age;
 
 
-    public User(String name, Integer age) {
+    public User(String name, Integer age)  {
         if(name == null || name.isBlank()){
-            throw new IllegalAccessException(String.format("잘못된 이름(%s)이 들어왔습니다.", name))
+
         }
         this.name = name;
         this.age = age;
