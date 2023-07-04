@@ -1,5 +1,8 @@
 package com.example.springArticleTest.entity;
 
+
+
+
 public class Article {
 
     private String title;

@@ -1,4 +1,4 @@
-package com.example.springArticleTest.dto;
+package com.example.springArticleTest.dto.article;
 
 public class ArticleResponse {
 

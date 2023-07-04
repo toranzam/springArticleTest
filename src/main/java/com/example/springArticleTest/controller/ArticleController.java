@@ -1,17 +1,23 @@
 package com.example.springArticleTest.controller;
 
 
-import com.example.springArticleTest.dto.ArticleRequest;
-import com.example.springArticleTest.dto.ArticleResponse;
+import com.example.springArticleTest.dto.article.ArticleRequest;
+import com.example.springArticleTest.dto.article.ArticleResponse;
 import com.example.springArticleTest.dto.Request;
 import com.example.springArticleTest.entity.Article;
+import com.example.springArticleTest.entity.ArticleEntity;
+import com.example.springArticleTest.repository.ArticleRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class ArticleController {
+
+    private final ArticleRepository articleRepository;
 
     List<Article> articles = new ArrayList<>();
 
@@ -34,19 +40,43 @@ public class ArticleController {
     }
 
 
-    @PostMapping("/Article")
+//    @PostMapping("/Article")
+//    public void createArticle(@RequestBody ArticleRequest request) {
+//        articles.add(new Article(request.getTitle(), request.getContent()));
+//    }
+
+    @PostMapping("/article")
     public void createArticle(@RequestBody ArticleRequest request) {
-        articles.add(new Article(request.getTitle(), request.getContent()));
+        ArticleEntity newArticle = request.toEntity(request);
+
+        articleRepository.save(newArticle);
+
     }
 
-    @GetMapping("/Article")
-    public List<ArticleResponse> showArticles(){
+//    @GetMapping("/article")
+//    public List<ArticleResponse> showArticles(){
+//        List<ArticleResponse> responses = new ArrayList<>();
+//        for(int i = 0; i < articles.size(); i++){
+//            responses.add(new ArticleResponse(i+1 , articles.get(i).getTitle(), articles.get(i).getContent()));
+//        }
+//        return responses;
+//    }
+
+    @GetMapping("/article")
+    public List<ArticleResponse> showArticles() {
+
         List<ArticleResponse> responses = new ArrayList<>();
+
+        List<ArticleEntity> articles = articleRepository.findAll();
+
         for(int i = 0; i < articles.size(); i++){
-            responses.add(new ArticleResponse(i+1 , articles.get(i).getTitle(), articles.get(i).getContent()));
+            responses.add(new ArticleResponse(i+1, articles.get(i).getTitle(), articles.get(i).getContent()));
+
         }
 
         return responses;
+
+
     }
 
 }

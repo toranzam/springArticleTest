@@ -1,4 +1,7 @@
-package com.example.springArticleTest.dto;
+package com.example.springArticleTest.dto.article;
+
+import com.example.springArticleTest.entity.Article;
+import com.example.springArticleTest.entity.ArticleEntity;
 
 public class ArticleRequest {
 
@@ -19,5 +22,9 @@ public class ArticleRequest {
 
     public String getContent() {
         return content;
+    }
+
+    public ArticleEntity toEntity(ArticleRequest request) {
+        return new ArticleEntity(null ,request.getTitle(), request.content);
     }
 }

@@ -1,9 +1,8 @@
 package com.example.springArticleTest.entity;
 
 
-import jdk.jfr.Category;
-import jdk.jfr.Enabled;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -11,6 +10,7 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
 public class ArticleEntity {
 
 
@@ -18,11 +18,12 @@ public class ArticleEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+
+    @Column(nullable = false)
     private String title;
 
     @Column
-    private String text;
+    private String content;
 
 
 
